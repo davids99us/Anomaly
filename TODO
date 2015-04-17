@@ -1,0 +1,47 @@
+BIG DATA: submitted
+
+PACKAGE: public, documented
+
+TESTS: testthat
+
+RUTHERGLEN:
+
+TRENDS: Distinguishing steps from trends.  Cusum of steps are sharm and trends are dish shaped.
+
+STARS: http://www.beringclimate.noaa.gov/regimes/  Its an Excel add-in; much of what you will need to know is as the site. However, I can also help. It won't handle big-data (about 10 years of daily data is its limit). STARS gives a datalist together with mean-shift level (and the relevant settings and t-statistics) plus a graph with a header telling of the settings. That is the output I want. I can tabulate results directly for instance. I can also straight-away draw graphs in Excel or Sigmaplot or whetever. This is all very useful and can be got at with little additional work It makes iterative testing easy.
+
+GuIDE: Although I don't understand your actual terminology (cuts>0.99 from predict.core3() step); 
+
+DRILL DOWN: being able to visualise at the big-data scale is very handy; but it's a coarse scale to work at. Its not possible to zero-in or drill down to particualr data for instance.  By way of illustration, what I did with the 'big' PH data was to break it down into more useable units. It was too big for Excel, so I used Rcmdr to generate daily summaries from the potentially 96 daily values (max, min, mean counts etc.). So I went essentially to the next level (days).
+I'm currently looking at daily temperature data. For this study, the handiest next level (for data checking) is annual (counts, max, min, mean etc.).( It could also be monthly as the next level.) By next level I mean, the level that is most useful, given the data and the nature of the study.
+
+ITERATIVE: then do tests at that 'level', once I've pruned the O/p, say removed days where N <50% of 96 values/day. I run STARS etc.  The invert of all that, is to create the summeries first, then test for steps at that next level (days, months etc.), which is probably the data you might end up graphing. Remember that I can't visualise beyond what I've seen.
+
+RESIDUALS: The only point that I'm really making is that we must have some condensed output that is handy. (The example I grabbed here was STARS analysis of Rutherglen Min after factoring-out rainfall*month (in R). Analysis was conducted on the residuals, which are on the page called ShiftData. The output of interest is ResMin & ResMin2. Residuals are given on respective sheets. On the right of ResMin2, I've got a condensed table of main results (done manually).
+
+FAULTS: The second stage in these analyses is to correct for known data-faults; or flag that they may exist. So we need some output indicating what the level change was (in units), and significances as determined by the test.
+ 
+SUMMARY: Hope I'm not jumping ahead of myself, but for big-data like these, a summary of say, daily, or monthly stats along the lines of data-counts, max, min, average, range, medians and quartiles would be particularly useful. (I'm not sure what you have in mind in terms of output. (We also need the 'baseline', showing the shifts: the blue line indicated in the graphs.) STARS gives a table of residuals after steps deducted.
+
+NESTING: I see the effects of missing data, but how do we get discrimination between highly significant brief jumps and, and possibly spurious and compounded changes in level. Using STARS as an explorative tool, I was looking at the tradeoff between increasing P, while decreasing L (record or time length). It's a manual 'sensitivity' exercise. Having lots of changepoints is not as useful as detecting 2 or 3 really important one's out of the data-cloud. (Questions will also invariably be asked about autocorrelation.)
+
+OPTIMISATION: Please don't think my comments are negative. There are many tests; but none that I know of inherently maximise Type1 error while minimising Type2. (And bear in mind I'm not a statistician and I cannot 'read' maths!) To my understanding, many of the available tests are based on a CuSum of a test statistic. (See attached.).
+
+RCMDR: David, this is what I got out of Rcmdr. Looks like I may have sent you a censored dataset; I don't see such a big gap in around 2000 (been some time since I looked at this).
+
+I went on to look at step-changes using STARS. I'm also including some graphs that might help in understanding the nature of the data and the problems.
+
+PARAMETERS: I don't know how much control the user may have over number of steps (or target time-lengths) vs. their significance; but that is essentially how I tune STARS. If you want I could send the uncensored data.
+
+CYCLES: I wonder how step changes could be differentialted from cycles? Also what about strongly trending series where a CuSum would bottom-out at about X-median?
+
+PH: I have a large 15-minute tide dataset (1988 to 2013) (much too big for Excel); contains missing data and cycles. R was useful for summarising counts and averages/day. Would you like to look at it as another example?
+
+GAPS: Good point. There was a gap in Rutherglen and all sustained data-gaps ought be investigated as potential station moves or other problems.The reason the gap is not apparent, is that STARS graphs output as attribute graphs (1 to N), not scatter-graphs (x-y).It assumes data are equi-spaced. STARS won't work with gaps; so I close-up on missing data, which is a bit of an unavoidable cheat.If you change graph-type to x,y the axis will go funny and need to be re-scaled, but you will see the graph with time-gaps. (You also cannot get valid trends using Excel 2000 from Attribute graphs; or from x,y graphs that include missing data. (Excel calculates trends over N cells; not N data pairs!) (It also averages over cells in array formula; unless an ISNUMBER test is used.) (Stats in Excel can be tricky!)If you want to use STARS there are some other tricks that I won't bore you with now. I think it is probably a useful test-case comparator, especially as you can generate data with it. However, it won't handle big-data.I look at stats from the point of view of a collaborating customer and had the luxury of working with a talented biometrician for 15 years. I've not been able to do that anymore (since I retired). I am not such a statistician myself (limited biometrical training) that I'm confident about what I do and my friend is just to busy engaged in 'policy' stuff. I know what I want though, in order to spin a story out of data.
+
+That is what I've been feeding-back.
+
+ARCHITECTURE:  I haven't gone into the
+architecture I am using but missing data is not in it.  Its is part of
+whats needed to get what.  The values are actually <datetime><value>
+pairs. Cheers

@@ -1,0 +1,11 @@
+Package: anomaly
+Type: Package
+Title: Anomaly Detection and Correction
+Version: 0.0.2
+Date: 2014-12-13
+Author: David Stockwell
+Maintainer: Contact is David Stockwell <d.stockwell@cqu.edu.au>
+Description: This package performs operations known as "homogenization" on time series data that is subject to various non-natural anomalies such as instrument baseline changes and spikes.
+License: GPL-2
+Encoding: UTF-8
+Imports: data.table, lubridate, changepoint
